@@ -22,3 +22,19 @@
 
 - `python manage.py runserver 0.0.0.0:8000`
 - Navigate browser to http://localhost:8000/
+
+## Models
+
+- Models are used by us to describe the data needed for our project.
+- Django sets up the database using these models.
+- Each model maps to a specific table in the database.
+- Django manages the relationship between our models and database, so we don't need to interact with database directly.
+- Docs: [https://docs.djangoproject.com/en/3.2/topics/db/models/](https://docs.djangoproject.com/en/3.2/topics/db/models/)
+
+- NOTE: The User model is provided to us out of the box by Django. We can override this in the `models.py` file within the `profiles_api` app.
+
+### Migration files
+
+- Django creates migration files to ensure our database matches our models.
+- In our vagrant directory and virtual environment, run `python manage.py makemigrations profiles_api`. This generates the migration file in the `migrations` folder of the app in question.
+- Run `python manage.py migrate` to apply the migration file to the database. This goes through our entire project and runs all migration files.
