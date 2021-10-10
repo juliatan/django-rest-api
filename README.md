@@ -20,7 +20,7 @@
 
 ### Start Django web development server
 
-- `python manage.py runserver 0.0.0.0:8000`
+- `python manage.py runserver 0.0.0.0:8000`. If there's an infinite loop situation, try `python manage.py runserver 0.0.0.0:8000 --noreload`
 - Navigate browser to http://localhost:8000/
 
 ## Models
@@ -38,3 +38,10 @@
 - Django creates migration files to ensure our database matches our models.
 - In our vagrant directory and virtual environment, run `python manage.py makemigrations profiles_api`. This generates the migration file in the `migrations` folder of the app in question.
 - Run `python manage.py migrate` to apply the migration file to the database. This goes through our entire project and runs all migration files.
+
+## Using the Django admin dashboard
+
+- In `admin.py`, import the model(s) from the various apps.
+- Dashboard is accessible at http://localhost:8000/admin/
+- Auth Token comes from the Django REST framework. Authentication and authorization comes from Django out of the box.
+- User profiles is automatically deduced from the way we called our UserProfile. It also pluralises it.
