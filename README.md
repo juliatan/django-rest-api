@@ -69,3 +69,11 @@
   - In our `profiles_api` app, create a `urls.py` file.
   - In `urls.py`, be sure to import `include` from `django.urls`. This allows us to include other app URLs into our root.
   - Add a URL to the list.
+
+### Serializer
+
+- Provided by Django REST framework. Allows us to easily converts data inputs into Python objects and vice versa.
+- In our `profiles_api` app, create a `serializers.py` file.
+- Our serializers should specify the fields we want to accept from the client. Similar to Django forms. They also take care of validation rules that are required for the fields.
+- Hook this up to our APIView in `profiles_api/views.py`.
+- Check it works by going to http://localhost:8000/api/hello-view/ and testing it out through the browsable API.
