@@ -45,3 +45,27 @@
 - Dashboard is accessible at http://localhost:8000/admin/
 - Auth Token comes from the Django REST framework. Authentication and authorization comes from Django out of the box.
 - User profiles is automatically deduced from the way we called our UserProfile. It also pluralises it.
+
+## Django REST Framework
+
+- Offers some helper methods to help us create our API endpoints.
+- The Django REST framework Views provided are the APIView and ViewSet classes.
+
+### APIView
+
+- Most basic type of view to build our API. Is similar to a traditional Django View but specifically for APIs.
+- Describes the logic that makes up an API endpoint. Gives us the most control over our application logic.
+- Allows us to match standard HTTP methods: GET, POST, PUT, DELETE.
+- Might be better to use this when:
+  - Need full control over the logic (e.g. multiple data sources).
+  - Processing files and rendering a synchronous response.
+  - Call other APIs / services in the same response.
+  - Accessing local files or data.
+- Create an APIView by:
+  - Open `profiles_api/views.py`. Create class based on APIView class.
+  - Define HTTP methods to handle. Each method must return a `Response` object. The `Response` object takes in either a list or dictionary (to allow it to convert to JSON).
+  - Define a URL endpoint and assign it to this new view.
+- To define a URL endpoint:
+  - In our `profiles_api` app, create a `urls.py` file.
+  - In `urls.py`, be sure to import `include` from `django.urls`. This allows us to include other app URLs into our root.
+  - Add a URL to the list.
