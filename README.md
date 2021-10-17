@@ -20,6 +20,7 @@
 
 ### Start Django web development server
 
+- `vagrant up`, `vagrant ssh`, `cd /vagrant`, `source ~/env/bin/activate`.
 - `python manage.py runserver 0.0.0.0:8000`. If there's an infinite loop situation, try `python manage.py runserver 0.0.0.0:8000 --noreload`
 - Navigate browser to http://localhost:8000/
 
@@ -77,3 +78,19 @@
 - Our serializers should specify the fields we want to accept from the client. Similar to Django forms. They also take care of validation rules that are required for the fields.
 - Hook this up to our APIView in `profiles_api/views.py`.
 - Check it works by going to http://localhost:8000/api/hello-view/ and testing it out through the browsable API.
+
+### Viewsets
+
+- Like APIViews, allow us to write logic for endpoints. Instead of writing functions that map to common HTTP methods, it accept functions that map to common API object actions e.g. list (ob jects), create, retrieve, update and destroy [an object].
+- Perfect for standard database operations. Fastest way to make a database interface.
+- Cases of when to use ViewSets over APIView:
+  - A simple CRUD API on existing database model
+  - A quick and simple API for pre-defined objects
+  - Little to no customisation on the logic
+  - Working with standard data structures
+- Create a ViewSet by:
+  - In `views.py`, create a class based on ViewSet.
+  - Define the action methods.
+  - Define the URL endpoint in `urls.py` and register our ViewSet through a router (provided by REST framework). Once then, add this to the urlpatterns (one time requirement).
+- Check it works by going to the root of our API http://localhost:8000/api . You should be able to see the new URL we defined in the router. Note, this feature doesn't show APIView URLs.
+- When defining the create method, we can use the same serializer concept as in the APIViews.
