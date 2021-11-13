@@ -128,3 +128,9 @@
 - Add `authentication_classes = (TokenAuthentication,)` to the `UserProfileViewSet` class. Add a comma, to ensure it's added as a tuple. Note you can add more than one authentication class if you wish.
 - Authentication classes sets method of authentication. Permission class sets the permission level. Add `permission_classes = (permissions.UpdateOwnProfile,)` which is the custom permissions class we just created.
 - Test in the browser by going to http://localhost:8000/api/profile . We will be able to see all users' profile since GET is a safe method. If we go to http://localhost:8000/api/profile/1/ we will no longer be able to see the forms to update the user.
+
+**Add filters**
+
+- In the `views.py` file, add `filter_backends = (filters.SearchFilter,)` to the `UserProfileViewSet`.
+- Also define the searchable fields
+- Test in the browser by clicking on the new "filters" button. In effect, this adds a search param to the GET url. e.g. http://localhost:8000/api/profile/?search=test
