@@ -6,6 +6,7 @@ from rest_framework.authentication import TokenAuthentication
 from rest_framework import filters
 from rest_framework.authtoken.views import ObtainAuthToken
 from rest_framework.settings import api_settings
+from rest_framework.permissions import IsAuthenticated
 
 from profiles_api import models
 from profiles_api import serializers
@@ -120,7 +121,7 @@ class UserProfileFeedViewSet(viewsets.ModelViewSet):
     authentication_classes = (TokenAuthentication,)
     serializer_class = serializers.ProfileFeedItemSerializer
     queryset = models.ProfileFeedItem.objects.all()
-    permission_classes = (permissions.UpdateOwnProfile, )
+    permission_classes = (permissions.UpdateOwnStatus, IsAuthenticated)
 
     # Allows us to override behaviour for creating a new object.
     # Serializer is a model serializer, so it has a save function assigned to it (it saves all the contents that comes into the serializer).

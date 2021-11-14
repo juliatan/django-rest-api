@@ -166,3 +166,12 @@
 - Because we only want the authenticated user to be able to create an item, we need to add `perform_create` to override the create method.
 - Add a new URL called 'feed' to our `urls.py` file.
 - Test it in the browser sending the authenticated user token. You should be able to POST, UPDATE and DELETE.
+
+**Create custom permission class**
+
+- To ensure a user can only update their own ProfileFeedItem, we need to define a new permissions class called `UpdateOwnStatus`. Do this in `permissions.py`.
+- In the viewset, set `permission_classes = (permissions.UpdateOwnStatus, IsAuthenticatedOrReadOnly)`. This means that a user must be authenticated, otherwise it's readonly. The can also only update an item that they own.
+
+**Ensure only authenticated users can view the feed**
+
+- Instead of using `IsAuthenticatedOrReadOnly` just use `IsAuthenticated` in the viewset.
