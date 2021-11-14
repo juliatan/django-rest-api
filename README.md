@@ -143,3 +143,26 @@
 - Go to `urls.py` and define a 'login/' url with our new `UserLoginApiView`.
 - Test in the browser by going to http://localhost:8000/api/login/ . You should be able to see the token in the response when your submit your username and password. Make a note of the token.
 - Use the ModHeader Chrome extension to add the token to the request header. (Authorization: Token <token>).
+
+### Create profile feed API
+
+- Create a new model called `ProfileFeedItem`. Each item will be linked to a `user_profile`, so we need to set this as a `ForeignKey`.
+- `on_delete=models.CASCADE` means that when a user is deleted, all of their other ProfileFeedItems will be deleted as well. Alternatively, we can set to null.
+- Need to run migration to create the table. Run `python manage.py makemigrations` and `python manage.py migrate`.
+
+**Add to admin dashboard**
+
+- In `admin.py` , add `admin.site.register(models.ProfileFeedItem)`.
+
+**Add serializer**
+
+- Create `ProfileFeedItemSerializer` which inherits from `serializers.ModelSerializer`.
+- Add all the fields from `ProfileFeedItem`, and make the `user_profile` field to read only.
+
+**Add viewset**
+
+- Create a new viewset called `UserProfileFeedViewSet`.
+- Provide a `queryset` which is the `ProfileFeedItem` model.
+- Because we only want the authenticated user to be able to create an item, we need to add `perform_create` to override the create method.
+- Add a new URL called 'feed' to our `urls.py` file.
+- Test it in the browser sending the authenticated user token. You should be able to POST, UPDATE and DELETE.
