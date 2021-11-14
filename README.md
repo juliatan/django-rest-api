@@ -134,3 +134,12 @@
 - In the `views.py` file, add `filter_backends = (filters.SearchFilter,)` to the `UserProfileViewSet`.
 - Also define the searchable fields
 - Test in the browser by clicking on the new "filters" button. In effect, this adds a search param to the GET url. e.g. http://localhost:8000/api/profile/?search=test
+
+**Add login API**
+
+- In the `views.py` file, add `from rest_framework.authtoken.views import ObtainAuthToken` to import the `ObtainAuthToken` class.
+- Add a new class called `UserLoginApiView` which inherits from `ObtainAuthToken`. Whilst we can add this directly to our URLs, it won't allow us to see this in our browsable API, so we need to override this and create our custom class.
+- Do this by adding `renderer_classes`. Note that the ModelViewset comes with this as default.
+- Go to `urls.py` and define a 'login/' url with our new `UserLoginApiView`.
+- Test in the browser by going to http://localhost:8000/api/login/ . You should be able to see the token in the response when your submit your username and password. Make a note of the token.
+- Use the ModHeader Chrome extension to add the token to the request header. (Authorization: Token <token>).

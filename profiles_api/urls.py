@@ -12,5 +12,6 @@ router.register('profile', views.UserProfileViewSet) # don't need base name beca
 
 urlpatterns = [
     path('hello-view/', views.HelloApiView.as_view()),  # as_view() allows APIView class to be rendered by our URLs
+    path('login/', views.UserLoginApiView.as_view()),
     path('', include(router.urls)), # include is imported from django.urls. Blank string because we don't want to include a prefix.
 ]
